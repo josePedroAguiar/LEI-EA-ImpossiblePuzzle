@@ -424,8 +424,6 @@ public class impossiblePuzzle {
 
             }
             else {
-                out.println(count);
-                out.println(par_count);
                 out.println("impossible puzzle!");
             }
         }
