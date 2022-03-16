@@ -46,7 +46,7 @@ public class impossiblePuzzle {
 
         Card position = allCards.get(i);
         int k=0;
-        while (k< 4){
+
             if (i==0){
 
                 board.set(i,position.rotations.get(k));
@@ -57,8 +57,8 @@ public class impossiblePuzzle {
                 if (solving_1(allCards, nColuna, nCards, board, hm, hm2, i + 1))
                     return true;
             }
-            k++;
-        }
+
+
         return false;
     }
     public static boolean solving_1( ArrayList<Card> allCards,int nColuna,int nCards,ArrayList<Rotation> board, Hashtable<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> hm,Hashtable<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> hm2,int i){
@@ -178,7 +178,6 @@ public class impossiblePuzzle {
             }
             Hashtable<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> hm = new Hashtable<>();
             Hashtable<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> hm2 = new Hashtable<>();
-            Hashtable<ArrayList<Integer>, ArrayList<ArrayList<Integer>>> hm3 = new Hashtable<>();
             Hashtable<Integer, ArrayList<Integer>> occ_number = new Hashtable<>();
             allCards = new ArrayList<>();
             ArrayList<Integer> aux_par;
@@ -261,15 +260,6 @@ public class impossiblePuzzle {
                     hm2.put(aux_par, item);
                 }
                 aux_par = new ArrayList<>();
-                aux_par.add(rotation.numbers.get(0));
-                aux_par.add(rotation.numbers.get(1));
-                aux_par.add(rotation.numbers.get(2));
-                if ((item = hm3.get(aux_par)) == null)
-                    hm3.put(aux_par, ocurrencias);
-                else {
-                    item.add(ocurrencia);
-                    hm3.put(aux_par, item);
-                }
 
                 //
                 aux_par = new ArrayList<>();
@@ -387,15 +377,15 @@ public class impossiblePuzzle {
                     card.rotations.add(aux_p);
                     allCards.add(card);
                 }}
-                /*
+            /*
             System.out.println(hm);
             System.out.println(hm2);
             for (Card c: allCards){
 
                 for (Rotation r : c.rotations)
                     System.out.print(r.numbers);
-                System.out.println();}
-*/
+                System.out.println();}*/
+
 
             //out.println(count);
             //out.println(par_count);
@@ -409,7 +399,7 @@ public class impossiblePuzzle {
                     StringBuilder str2 = new StringBuilder();
                     String aux = "  ";
                     for (int a = 0; a < board.size(); a++) {
-                        if (a != 0 && a % column == 0) {
+                        if (a != 0 && a % column == 0 ) {
                             str.append(str1).append("\n").append(str2).append("\n\n");
                             str1 = new StringBuilder();
                             str2 = new StringBuilder();
