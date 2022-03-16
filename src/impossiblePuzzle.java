@@ -109,6 +109,7 @@ public class impossiblePuzzle {
 
                             return true;
                         }
+                        card.used = 0;
 
 
                     }
@@ -126,6 +127,7 @@ public class impossiblePuzzle {
                                 return true;
 
                             }
+                            card.used = 0;
                         }
                     }
 
@@ -142,11 +144,12 @@ public class impossiblePuzzle {
                     if (solving_1(allCards, nColuna, nCards, board, hm, hm2, i + 1)) {
                         return true;
                     }
+                    card.used = 0;
                 }
 
 
             }
-            card.used = 0;
+
         }
         return false;
     }
@@ -157,6 +160,7 @@ public class impossiblePuzzle {
         impossiblePuzzle.InputReader in = new impossiblePuzzle.InputReader(System.in);
         PrintWriter out = new PrintWriter(System.out);
         ArrayList<Rotation> board;
+        StringBuilder str_final = new StringBuilder();
         ArrayList<Card> allCards;
         int number1 = in.nextInt();
         long startTime = System.nanoTime();
@@ -227,6 +231,7 @@ public class impossiblePuzzle {
 
 
                 }
+                if(j!=0){
                 ArrayList<ArrayList<Integer>> ocurrencias = new ArrayList<>();
                 Rotation rotation = new Rotation(numbers);
                 //
@@ -371,6 +376,17 @@ public class impossiblePuzzle {
                 allCards.add(card);
 
             }
+            else {
+                    Rotation rotation = new Rotation(numbers);
+                    card.rotations.add(rotation);
+                    Rotation aux_p = new Rotation(makePositions(numbers));
+                    card.rotations.add(aux_p);
+                    aux_p = new Rotation(makePositions(makePositions(numbers)));
+                    card.rotations.add(aux_p);
+                    aux_p = new Rotation(makePositions(makePositions(makePositions(numbers))));
+                    card.rotations.add(aux_p);
+                    allCards.add(card);
+                }}
                 /*
             System.out.println(hm);
             System.out.println(hm2);
@@ -383,6 +399,9 @@ public class impossiblePuzzle {
 
             //out.println(count);
             //out.println(par_count);
+
+
+
             if (count <= 4 && square_count>=((column-1)*(line-1))&&par_count>=2*nCards-2/*&&trio_count>=(column*(line-1))*/) {
                 if (solving(allCards, column, nCards, board, hm, hm2, 0)) {
                     StringBuilder str = new StringBuilder();
@@ -406,18 +425,19 @@ public class impossiblePuzzle {
 
 
                     str.append(str1).append("\n").append(str2).append("\n");
-                    out.print(str);
+                    str_final.append(str);
                 } else {
-                    out.println("impossible puzzle!");
+                    str_final.append("impossible puzzle!\n");
                 }
 
             }
             else {
                 //out.println();
                 //out.println(trio_count);
-                out.println("impossible puzzle!");
+                str_final.append("impossible puzzle!\n");
             }
         }
+        out.print(str_final);
         long endTime   = System.nanoTime();
         long totalTime = endTime - startTime;
         //out.println(totalTime+"s");
